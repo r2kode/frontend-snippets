@@ -1,0 +1,6 @@
+.content__header {
+  color: rgb(0, 0, 0);
+}
+.content__header::after {
+  content: " --- desktop";
+}

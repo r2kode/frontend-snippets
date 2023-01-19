@@ -1,0 +1,229 @@
+@layer basic, focus, darkmode, invalid;
+
+/* ---------------------------------
+   Styling when a field has focus
+   --------------------------------- */
+@layer focus {
+  /* -- Styling whole form when any field has focus -- */
+  /* Could use `form:focus-within` instead */
+  form:has(:focus-visible) {
+    background: antiquewhite;
+    border: 4px solid antiquewhite;
+  }
+  /* -- Styling other fields when one field has focus -- */
+  form:has(:focus-visible) div:has(input:not(:focus-visible)) label {
+    color: peru;
+  }
+  form:has(:focus-visible) div:has(input:not(:focus-visible)) input {
+    border: 2px solid peru;
+  }
+} /* End "focus" layer */
+
+/* --------------------------------- 
+   Styling field if input is invalid 
+   --------------------------------- */
+@layer invalid {
+  input:invalid {
+    outline: 4px solid red;
+    border: 2px solid red;
+  }
+  div:has(input:invalid) label {
+    color: crimson;
+  }
+  label:has(+ input:invalid)::before {
+    content: "✖ ";
+    color: crimson;
+  }
+} /* End "invalid" layer */
+
+/* ---------------------------------
+   Dark Mode when checkbox checked 
+   ---------------------------------  */
+@layer darkmode {
+  body:has(input[type="checkbox"]:checked) {
+    background: rgb(33, 33, 33);
+    --primary-color: white;
+  }
+  body:has(input[type="checkbox"]:checked) main {
+    color: var(--primary-color);
+  }
+  body:has(input[type="checkbox"]:checked) form {
+    border: 4px solid white;
+  }
+  body:has(input[type="checkbox"]:checked) form:has(:focus-visible) {
+    background: navy;
+  }
+  body:has(input[type="checkbox"]:checked) input:focus-visible {
+    outline: 4px solid lightsalmon;
+    border: 2px solid lightsalmon; /* needed for Chrome */
+  }
+} /* End "darkmode" layer */
+
+/* ---------------------------------  
+   Basic styling 
+   --------------------------------- */
+@layer basic {
+  body {
+    background: burlywood;
+    --primary-color: black;
+    color: var(--primary-color);
+    margin: calc(1rem + 2vw);
+  }
+
+  /* ---- Layout ---- */
+  article {
+    display: grid;
+    grid-template-columns: 1fr min-content max-content 1fr;
+    grid-column-gap: calc(4vw + 0.5rem);
+  }
+  form {
+    grid-column: 2 / 3;
+  }
+  footer {
+    width: 100%;
+  }
+
+  /* -- Basic form styling -- */
+  form {
+    border: 4px solid white;
+    padding: 2rem 3rem;
+    width: min-content;
+  }
+  form label,
+  form input {
+    display: block;
+  }
+  label,
+  input {
+    font-size: 1.2rem;
+    font-family: Avenir, Helvetica, sans-serif;
+  }
+  div {
+    margin: 1.25rem 0;
+  }
+  input {
+    margin: 0.25rem 0;
+    padding: 0.5rem;
+    appearance: none;
+    border: 2px solid var(--primary-color);
+  }
+  :focus-visible {
+    outline: 4px solid sienna;
+    border: 2px solid sienna; /* needed for Chrome */
+  }
+  input[type="checkbox"] {
+    float: left;
+    margin-right: 0.66rem;
+  }
+  footer:has(input[type="checkbox"]) label {
+    display: inline-block;
+    margin: 1px 0 0;
+  }
+  body > footer {
+    background: #ccc;
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  /* -- Custom checkbox styling -- */
+  @supports (appearance: none) {
+    input[type="checkbox"] {
+      appearance: none;
+      width: 1.6rem;
+      height: 1.6rem;
+      border: 2px solid var(--primary-color);
+      background: white;
+      margin-top: 0;
+    }
+    input[type="checkbox"]:checked {
+      position: relative;
+      background: none;
+    }
+    input[type="checkbox"]:checked::after {
+      position: absolute;
+      top: 0.35rem;
+      left: 0.12rem;
+      content: "";
+      width: 0.9rem;
+      height: 0.3rem;
+      border: 4px solid var(--primary-color);
+      border-right: none;
+      border-top: none;
+      transform: rotate(-45deg);
+    }
+  }
+
+  body:has(option[value="pony"]:checked) {
+    --font-family: cursive;
+    --text-color: #b10267;
+    --body-background: #ee458e;
+    --main-background: #f4b6d2;
+  }
+  body:has(option[value="wine"]:checked) {
+    --font-family: avenir, helvetica;
+    --text-color: white;
+    --body-background: black;
+    --main-background: brown;
+  }
+  body:has(option[value="molly"]:checked) {
+    --font-family: helvetica;
+    --text-color: white;
+    --body-background: #6c3;
+    --main-background: #09c;
+  }
+  body:has(option[value="zeldman"]:checked) {
+    --font-family: georgia;
+    --text-color: black;
+    --body-background: #c30;
+    --main-background: #f60;
+  }
+  body {
+    /* background-color: var(--body-background); */
+  }
+  main {
+    color: var(--text-color);
+    /* background-color: var(--main-background); */
+    padding: 2rem;
+    height: 80vh;
+    font-family: var(--font-family);
+  }
+  h1 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.4rem;
+  }
+} /* End "basic" layer */
+
+/* Warning message 
+   about support for :has() */
+
+@supports selector(:has(img)) {
+  body small {
+    display: none;
+  }
+}
+small {
+  background: crimson;
+  color: white;
+  padding: 1rem;
+  display: block;
+  font-family: Helvetica;
+  font-weight: 600;
+  font-size: 1rem;
+  max-width: max-content;
+  margin-bottom: 2rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+small code {
+  font-family: courier;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.33);
+}
+small a {
+  color: white;
+}
+small a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}

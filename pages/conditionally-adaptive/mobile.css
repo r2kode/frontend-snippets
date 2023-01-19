@@ -1,0 +1,6 @@
+.content__header {
+  color: rgb(214, 37, 37);
+}
+.content__header::after {
+  content: " --- mobile";
+}

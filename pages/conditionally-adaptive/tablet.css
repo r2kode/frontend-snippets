@@ -1,0 +1,6 @@
+.content__header {
+  color: rgb(3, 255, 58);
+}
+.content__header::after {
+  content: " --- tablet";
+}

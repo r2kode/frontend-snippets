@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Using :has() as a CSS Parent Selector and much more</title>
+  </head>
+  <body>
+    <main>
+      <h1>Choose a theme</h1>
+      <menu>
+        <label for="color-mode">Options:</label>
+        <select name="color-mode" id="color-mode">
+          <option value="pony">Pony</option>
+          <option value="wine">Wine</option>
+          <option value="molly">Molly</option>
+          <option value="zeldman">Zeldman</option>
+        </select>
+      </menu>
+      <article>
+        <form>
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" />
+          </div>
+          <div>
+            <label for="site">Website</label>
+            <input type="url" id="site" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" />
+          </div>
+        </form>
+        <footer>
+          <input type="checkbox" id="check" />
+          <label for="check">Dark mode</label>
+        </footer>
+      </article>
+    </main>
+    <footer>
+      <a
+        href="https://webkit.org/blog/13096/css-has-pseudo-class/"
+        target="_blank"
+        >Using :has() as a CSS Parent Selector and much more</a
+      >
+      <small
+        >To see the affect of <code>:has( )</code>, use a
+        <a href="https://caniuse.com/css-has" target="_blank"
+          >browser that supports it</a
+        >.</small
+      >
+    </footer>
+  </body>
+</html>

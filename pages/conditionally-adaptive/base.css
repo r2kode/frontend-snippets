@@ -1,0 +1,8 @@
+.content {
+  background: #3580ca;
+  padding: 2rem;
+  margin: 2rem 0.125rem;
+}
+.content__header {
+  color: azure;
+}
